@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    <div>
+      <div>
+        <h4>Updata the Students Data</h4>
+      </div>
+
+      <div class='container'>
+        <div class="card-form">
+          <form method="POST" action="/update/{{dt.id}}">
+            {% csrf_token %}
+            <input type="text" placeholder="Student Name" name="student" value={{dt.studentName}} />
+            
+            <input
+              type="email"
+              required
+              placeholder="Student Eamil"
+              name="email"
+              value={{dt.email}}
+            />
+            <input type="text" placeholder="Course and Branch" name="branch"  value={{dt.branch}} />
+            <label for="">Passing Year</label>
+            <input
+              type="date"
+              placeholder="Passing Year"
+              id="year"
+              name="year"
+              value={{dt.year}}
+              
+            />
+            <label for="language">Select Language</label>
+            <select name="language" id="language">
+              <option selected> {{dt.language}}</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="CPP">C++</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Golang">Golang</option>
+              <option value="Rust">Rust</option>
+              <option value="Ruby">Ruby</option>
+              <option value="Nail">Nail</option>
+            </select>
+            <button type="submit">Updata The Data</button>
+          </form>
+        </div>
+       
+      </div>
+    </div>
+  </body>
+</html>

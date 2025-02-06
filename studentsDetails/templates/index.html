@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    <div>
+      <div>
+        <h1>CRUD Operations</h1>
+        <h4>Insert the Students Data</h4>
+      </div>
+
+      <div class='container'>
+        <div class="card-form">
+          <form method="POST" action="/insert">
+            {% csrf_token %}
+            <input type="text" placeholder="Student Name" name="student" />
+            <input
+              type="email"
+              required
+              placeholder="Student Eamil"
+              name="email"
+            />
+            <input type="text" placeholder="Course and Branch" name="branch" />
+            <label for="">Passing Year</label>
+            <input
+              type="date"
+              placeholder="Passing Year"
+              id="year"
+              name="year"
+            />
+            <label for="language">Select Language</label>
+            <select name="language" id="language">
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="CPP">C++</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Golang">Golang</option>
+              <option value="Rust">Rust</option>
+              <option value="Ruby">Ruby</option>
+              <option value="Nail">Nail</option>
+            </select>
+            <button type="submit">Add The Data</button>
+          </form>
+        </div>
+        <div>
+         {% for message in messages %}
+         <h5>{{message.tags}}</h5>
+         <p>
+       {{message}}
+         </p>
+         
+         {% endfor %}
+            <table>
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Student Name</th>
+                  <th>Student Email</th>
+                  <th>Course & Branch</th>
+                  <th>Passing Year</th>
+                  <th>Language</th>
+                  <th>Edit</th>
+                  <th>delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for dt in data %}
+                <tr>
+                  <td>{{dt.id}}</td>
+                  <td>{{dt.studentName}}</td>
+                  <td>{{dt.email}}</td>
+                  <td>{{dt.branch}}</td>
+                  <td>{{dt.year}}</td>
+                  <td>{{dt.language}}</td>
+                  <td><a href="/update/{{dt.id}}"><button>Edit</button></a></td>
+                  <td><a href="/delete/{{dt.id}}"><button>Delete</button></a></td>
+                
+                </tr>
+                {% endfor %}
+              </tbody>
+              
+            </table>
+         
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
